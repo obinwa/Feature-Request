@@ -1,0 +1,88 @@
+<html>
+    <head>
+        <script src=" {{url_for('static', filename='js/jquery-3.3.1.min.js')}}"></script>
+    </head>
+
+    <body>
+        <div>
+            <form action = '/RequestInfo' method="POST">
+                <p>
+                    <input type="text" name="title" required>
+                </p>
+                
+                <p>
+                    <input type="textarea" name="desc" cols='50' rows='10' required>
+                </p>
+                
+                <p>
+                    <select name="client" >
+                        <option value="ClientA">ClientA</option>
+                        <option value="ClientB">ClientB</option>
+                        <option value="ClientC">ClientC</option>
+                        <option value="ClientD">ClientD</option>
+                      </select>
+                </p>
+
+                <p>
+                    <div id="pr"></div>
+                </p>
+                
+                <p>
+                    <input type="date" name="tdate" required>
+                </p>
+                
+                
+                <p>
+                    <select name="prd_area">
+                        <option value="Policies">Policies</option>
+                        <option value="Billing">Billing</option>
+                        <option value="Claims">Claims</option>
+                        <option value="Reports">Reports</option>
+                      </select>
+                </p>
+                <input type='submit' value="SUBMIT">
+            </form>
+        </div>
+
+        <script>
+            // function getPriority()
+            // {
+            //     console.log('in here');
+            //     var client = $("[name= 'client']")[0].val();
+            //     console.log(client);
+            // }
+
+            function createSelect(numbers)
+            {
+                var data = numbers;
+                //var data = numbersString.split(',');
+
+                var s = $("<select id=\"selectId\" name=\"client_pr\" />");
+                for(var val = 0 ;val <data.length; val++ ) {
+                    $("<option />", {value: data[val].toString(), text: data[val].toString()}).appendTo(s);
+                }
+                s.appendTo("#pr");
+            }
+
+            $(document).ready(function () {
+
+                $("[name= 'client']").change(function (event) {
+                    alert("You have Selected  :: "+$(this).val());
+                    var client
+                    $.ajax({
+                        url: '/priority',
+                        data: {client : $(this).val()},
+                        type: 'POST',
+                        success: function(response) {
+                            console.log(response);
+                            createSelect(response);
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>
