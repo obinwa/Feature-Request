@@ -1,1 +1,1 @@
-web: gunicorn Britcore:api
+web: gunicorn app:api
