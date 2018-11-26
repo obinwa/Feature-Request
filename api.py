@@ -20,7 +20,7 @@ database_file = 'postgresql://localhost/reqInfo' #"sqlite:///{}".format(os.path.
 app.config["SQLALCHEMY_DATABASE_URI"] = database_file
 
 db = SQLAlchemy(app)
-db.create_all()
+#db.create_all()
 
 class FRequest(db.Model):
     __tablename__  = 'f_request'
