@@ -17,7 +17,7 @@ app.config["DEBUG"] = False #True
 project_dir = os.path.dirname(os.path.abspath(__file__))
 database_file = 'postgresql://localhost/reqInfo' #"sqlite:///{}".format(os.path.join(project_dir, "bookdatabase.db"))
 
-app.config["SQLALCHEMY_DATABASE_URI"] = database_file
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ['DATABASE_URL'] # database_file
 
 db = SQLAlchemy(app)
 #db.create_all()
