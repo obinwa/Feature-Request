@@ -151,6 +151,7 @@ def remove_num(num,array):
     array.remove(num)
     return array
 
-
-app.run()
+if __name__ == '__main__':
+    #f
+    app.run()
 
